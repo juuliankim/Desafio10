@@ -3,11 +3,11 @@ class Productos{
         this.productos = [];
     }
 
-    check(){        
+    listar(){        
         return this.productos;
     }
 
-    checkId(id){
+    listarId(id){
         let found = this.productos.find(element => element.id === id);
         if(found==undefined){
             found = 'Producto no encontrado';
@@ -15,7 +15,7 @@ class Productos{
         return found;
     }
 
-    save(obj){
+    guardar(obj){
         try {
             const largo = this.productos.length;
             this.productos.push({...obj,id:largo+1});
@@ -27,7 +27,7 @@ class Productos{
         }
     }
 
-    delete(id){
+    borrar(id){
         try {
             const producto = this.productos.find(item => item.id == id);
             this.productos = this.productos.filter(a => a.id != id);
@@ -39,7 +39,7 @@ class Productos{
         }
     }
 
-    update(id, obj){
+    actualizar(id, obj){
         try {
             const indice = this.productos.findIndex(item => item.id == id);
             this.productos[indice].title = obj.title;
