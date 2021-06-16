@@ -5,17 +5,14 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 app.engine('hbs', handlebars({
     extname: '.hbs',
     defaultLayout: 'index.hbs',
-    layoutsDir: __dirname + '/views/layouts',
-    partialsDir: __dirname + '/views/partials'
 }));
 
 app.set('view engine', 'hbs');
-
 app.set('views','./views');
 
 app.use((err, req, res, next) =>{
@@ -24,11 +21,11 @@ app.use((err, req, res, next) =>{
 });
 
 const router = require('./routes/routes');
-app.use('/api',router);
+app.use('/api', router);
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8081;
 
-const server = app.listen(PORT, ()=>{
+const server = app.listen(PORT, () => {
     console.log(`servidor corriendo en http://localhost:${PORT}`);
 });
 

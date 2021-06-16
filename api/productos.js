@@ -7,26 +7,20 @@ class Productos{
         return this.productos;
     }
 
-    listarId(id){
-        let found = this.productos.find(element => element.id === id);
-        if(found==undefined){
-            found = 'Producto no encontrado';
+    listarPorId(id){
+        let producto = this.productos.find(e => e.id === id);
+        if(producto==undefined){
+            producto = 'Producto no encontrado';
         }
-        return found;
+        return producto;
     }
 
-    guardar(obj){
-        try {
-            const largo = this.productos.length;
-            this.productos.push({...obj,id:largo+1});
-            return this.productos[largo];    
-        } catch (error) {
-            return [{
-                error: error
-            }];
-        }
+    guardar(producto){
+        const largo = this.productos.length;
+        this.productos.push({...producto,id:largo+1});
+        return this.productos[largo];
     }
-
+       
     borrar(id){
         try {
             const producto = this.productos.find(item => item.id == id);
@@ -39,12 +33,12 @@ class Productos{
         }
     }
 
-    actualizar(id, obj){
+    actualizar(id, producto){
         try {
             const indice = this.productos.findIndex(item => item.id == id);
-            this.productos[indice].title = obj.title;
-            this.productos[indice].price = obj.price;
-            this.productos[indice].thumbnail = obj.thumbnail;
+            this.productos[indice].title = producto.title;
+            this.productos[indice].price = producto.price;
+            this.productos[indice].thumbnail = producto.thumbnail;
             return this.productos[indice];
         } catch (error) {
             return [{
